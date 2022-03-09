@@ -1,9 +1,16 @@
-import { readFile, writeFile } from "fs/promises"
+import { readFile, writeFile, access } from "fs/promises"
 import { argv } from "process"
 
 const copy = async function (from, to) {
     try {
         const readData = await readFile(from)
+
+        try {
+            await access(to)
+            console.warn("File already exists!")
+        } catch (e) {
+            // do nothing, file doesnt exist
+        }
 
         try {
             await writeFile(to, readData)
