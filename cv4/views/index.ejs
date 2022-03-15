@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Index</title>
+    </head>
+
+    <body>
+        <h1><%= title %></h1>
+
+        <table>
+            <tr>
+                <th>text</th>
+                <th>hotovo</th>
+                <th>smazat</th>
+            </tr>
+
+            <% for (const todo of todos) { %>
+                <tr>
+                    <td>
+                        <%= todo.text %>
+                    </td>
+                    <td>
+                        <!-- emoji do kodu nepatri -->
+                        <% if (todo.done) { %>
+                            <a href="undone/<%= todo.id %>">
+                                ✅
+                            </a>
+                        <% } else { %>
+                            <a href="done/<%= todo.id %>">
+                            ❌
+                            </a>
+                        <% } %>
+                    </td>
+                    <td>
+                        <a href="delete/<%= todo.id %>">
+                            (smazat)
+                        </a>
+                    </td>
+                </tr>
+            <% } %>
+        </table>
+
+        <form action="/add" method="post">
+            <h3>Přidat další</h3>
+            <input type="text" name="text">
+            <button type="submit">Uložit</button>
+        </form>
+    </body>
+</html>
